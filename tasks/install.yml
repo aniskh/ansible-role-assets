@@ -5,7 +5,7 @@
     name: "{{ sqlite_packages }}"
     state: present
   delegate_to: localhost
-  run_once: yes
+  run_once: true
 - name: create sqlite data directory
   file:
     path: "{{ sqlite_datadir }}"
@@ -14,14 +14,14 @@
     mode: 0755
     state: directory
   delegate_to: localhost
-  run_once: yes
+  run_once: true
 - name: copy query file to diirectory
   copy:
     src: createquery.sql
     dest: "{{ sqlite_datadir }}"
   delegate_to: localhost
-  run_once: yes
+  run_once: true
 - name: create table
   shell: "cd {{ sqlite_datadir }}; sqlite3 {{ database_name }} < createquery.sql"
   delegate_to: localhost
-  run_once: yes
+  run_once: true
