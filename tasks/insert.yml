@@ -1,0 +1,10 @@
+---
+- template:
+        src: insertquery.sql.j2
+        dest: "{{ sqlite_datadir }}/insertquery.sql" 
+  delegate_to: localhost
+  run_once: yes
+- name: Insert Data
+  shell: "cd {{ sqlite_datadir }}; sqlite3 {{ database_name }} < insertquery.sql"
+  delegate_to: localhost
+  run_once: yes

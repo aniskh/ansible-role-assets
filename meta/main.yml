@@ -1,0 +1,17 @@
+galaxy_info:
+  author: Anis KHACHNAOUI
+  description: Asset Inventory, Creates an SQLite database containing informations about nodes (name, type, technology, OS, IP, ... )
+  company:
+  role_name: assets
+  license: GPL-2.0
+  min_ansible_version: 2.9
+  platforms:
+    - name: EL
+      versions:
+        - 7
+        - 8
+  galaxy_tags:
+   - automation
+   - Assets
+   - Inventory
+dependencies: []

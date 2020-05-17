@@ -1,0 +1,24 @@
+---
+# Load Variables depending on OS
+- name: include os specific vars
+  include_vars: '{{ item }}'
+  with_first_found:
+    - '{{ ansible_distribution }}_{{ ansible_distribution_major_version }}.yml'
+    - '{{ ansible_os_family }}.yml'
+  tags:
+    - 'setup'
+# Install SQLite
+- name: import installation tasks
+  import_tasks: install.yml
+  tags:
+    - 'setup'
+# Collect asset Info
+- name: import info collection tasks
+  import_tasks: collect.yml
+  tags:
+    - 'run'
+# Inster asset info
+- name: import insertion tasks
+  import_tasks: insert.yml
+  tags:
+    - 'run'

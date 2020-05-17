@@ -1,0 +1,45 @@
+---
+- name: get asset name
+  set_fact: 
+     asset_name: "{{ ansible_hostname }}"
+- name: get asset FQDN
+  set_fact:
+     asset_fqdn: "{{ ansible_fqdn }}"
+- name: get asset IP address
+  set_fact:
+     asset_ipaddress: "{{ ansible_default_ipv4.address }}"
+- name: get asset OS
+  set_fact:
+     asset_os: "{{ ansible_distribution }}"
+- name: get asset OS Version
+  set_fact:
+     asset_osversion: "{{ ansible_distribution_version }}"
+- name: get asset CPU number
+  set_fact:
+     asset_cpunbr: "{{ ansible_processor_vcpus }}"
+- name: get asset Memory size
+  set_fact:
+     asset_memorysize: "{{ ansible_memory_mb.real.total }}"
+- name: Last time asset been requested
+  set_fact:
+          asset_date: "{{ ansible_date_time.iso8601 }}"
+- name: Check Asset technology type
+  set_fact:
+          asset_technology: "{{ ansible_product_name }}"
+- name: Check Asset technology Version
+  set_fact:
+          asset_technologyver: "{{ ansible_product_version }}"
+- name: Check Asset type
+  set_fact:
+          asset_type: "VM"
+# Check if the machine is physical
+- name: check hypervisor flag in machine 
+  shell: 'cat /proc/cpuinfo | grep flags | grep hypervisor | wc -l'
+  register: hyperviserflag
+- name: Asset is it physical ?
+  set_fact:
+          asset_type: "Physical machine"
+  when: " hyperviserflag.rc == false and hyperviserflag.stdout == '0'"
+- name: Check Asset Kernel
+  set_fact:
+          asset_kernel: "{{ ansible_kernel }}" 

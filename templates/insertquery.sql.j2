@@ -1,0 +1,7 @@
+INSERT INTO assets (asset_name, asset_fqdn, asset_type, asset_technology, asset_technology_version, asset_kernel, asset_os, asset_os_version, asset_ipaddress, asset_cpu_number, asset_total_memory, asset_ping_date)
+VALUES
+{% for host in groups['all'] %}
+('{{ hostvars[host].asset_name }}', '{{ hostvars[host].asset_fqdn }}' , '{{ hostvars[host].asset_type }}', '{{ hostvars[host].asset_technology }}', '{{ hostvars[host].asset_technologyver }}', '{{ hostvars[host].asset_kernel }}', '{{ hostvars[host].asset_os }}', '{{ hostvars[host].asset_osversion }}', '{{ hostvars[host].asset_ipaddress }}', '{{ hostvars[host].asset_cpunbr }}', '{{ hostvars[host].asset_memorysize }}','{{ hostvars[host].asset_date }}'),
+{% endfor %}
+(' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ')
+;

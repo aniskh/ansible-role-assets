@@ -1,0 +1,4 @@
+---
+# vars file for asset
+sqlite_datadir: /tmp/sqlite
+database_name: assets
